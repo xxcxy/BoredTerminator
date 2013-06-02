@@ -4,5 +4,5 @@
     <string name="app_name">BoredTerminator</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT hello u807</string>
-
+	<string name="description">无聊神器</string>
 </resources>

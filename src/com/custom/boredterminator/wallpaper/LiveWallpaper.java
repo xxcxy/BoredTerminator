@@ -139,6 +139,7 @@ public class LiveWallpaper extends WallpaperService {
 		public void onVisibilityChanged(boolean visible) {
 			Log.d("LiveWallpaper","onVisibilityChanged");
 			mVisible = visible;
+			changeTime=0;
 			if (visible) {
 				draw();
 			} else {
