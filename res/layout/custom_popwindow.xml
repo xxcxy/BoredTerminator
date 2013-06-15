@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.custom.boredterminator.uiextends.CustomLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/customPop_main"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="vertical" >
+
+    <ImageView
+        android:id="@+id/popup_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/imageDescription"
+        android:adjustViewBounds="true"
+        android:maxHeight="270dip"
+        android:maxWidth="270dip"
+        android:scaleType="fitCenter" >
+    </ImageView>
+
+    <TextView
+        android:id="@+id/popup_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        android:ems="19"
+        android:textAppearance="?android:attr/textAppearanceSmallInverse"
+        android:background="@color/orange" >
+    </TextView>
+
+</com.custom.boredterminator.uiextends.CustomLinearLayout>

@@ -1,8 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="app_name">BoredTerminator</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT hello u807</string>
 	<string name="description">无聊神器</string>
+	<string name="imageDescription">图片</string>
+	<string name="wallpaper_settings">设置</string>
+	<string name="more_choose">更多选项</string>
+  	<string name="settings">Settings</string>
+  	<string name="change_period_title">设置切换背景时间</string>
+  	<string name="change_period_summary">选择背景图片文件夹后可用</string>
+  	<string name="change_period">change_period</string>
+  	<string name="btset">btset</string>
+  	<string name="btset_title">会无聊吗？</string>
+  	<string name="btset_summary_off">不会无聊</string>
+  	<string name="btset_summary_on">会无聊</string>
+  	<string name="pref_pic">pref_pic</string>
+  	<string name="pref_pic_title">选择桌面图片</string>
+  	<string name="pref_pic_summary">选择桌面背景图片</string>
+  	<string name="pref_file">pref_file</string>
+  	<string name="pref_file_title">选择背景图片文件夹</string>
+  	<string name="pref_file_summary">请选择文件夹</string>
+  	<string name="confim">确定</string>
+  	<string name="cancle">取消</string>
 </resources>
