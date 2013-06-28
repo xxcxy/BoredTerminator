@@ -3,6 +3,9 @@ package com.custom.boredterminator.wallpaper;
 import java.io.FileNotFoundException;
 import java.util.List;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -20,8 +23,10 @@ import android.view.SurfaceHolder;
 import com.custom.boredterminator.CustomPopupWindow;
 import com.custom.boredterminator.R;
 import com.custom.boredterminator.db.JokeDBHelper;
+import com.custom.boredterminator.util.DateUtil;
 import com.custom.boredterminator.util.FileUtil;
 import com.custom.boredterminator.util.ImageUtil;
+import com.custom.boredterminator.util.StringUtil;
 
 public class CustomLiveWallpaper extends WallpaperService {
 	public static final String SHARED_PREFS_NAME = "com.custom.boredterminator.prefs";
@@ -29,7 +34,9 @@ public class CustomLiveWallpaper extends WallpaperService {
 	public static float SCALESIZE = 1.0f;
 	public static int DISPLAYWIDTH;
 	public static int DISPLAYHEIGHT;
-	
+	public static String UPDATESET = "all";
+	private Intent intent;
+//	private Timer timer = new Timer();
 	class PaperEngine extends Engine implements
 			SharedPreferences.OnSharedPreferenceChangeListener {
 		private Paint mPaint;
@@ -70,13 +77,14 @@ public class CustomLiveWallpaper extends WallpaperService {
 							Log.d("LiveWallpaper", "cool!");
 							changeTime++;
 							cpw.hide();
-							if (changeTime >= MAXCHANGETIME) {
+							if (changeTime >= MAXCHANGETIME&&CustomLiveWallpaper.BTSHOW&&cpw.getNeedShow()) {
 								String[] joke = dbr.getJoke();
 								Bitmap bm = null;
-								if (joke[1] != null && !"".equals(joke[1]))
+								if (StringUtil.isNotBlank(joke[1]))
 									bm = FileUtil.getBitmapFile(joke[1],
 											getApplicationContext());
-								cpw.show(joke[0], bm);
+								if(StringUtil.isNotBlank(joke[0])||bm!=null)
+									cpw.show(joke[0], bm);
 								changeTime = 0;
 							}
 						}
@@ -145,7 +153,7 @@ public class CustomLiveWallpaper extends WallpaperService {
 									.get(backgroundIndex
 											% backgroundFiles.size()));
 					canvas.drawBitmap(changegroud, 0, 0, null);
-					mHandler.postDelayed(mDrawRun, 5 * 1000);
+					mHandler.postDelayed(mDrawRun, showperiod * 1000);
 				} else
 					canvas.drawBitmap(background, 0, 0, null);
 			} finally {
@@ -199,6 +207,7 @@ public class CustomLiveWallpaper extends WallpaperService {
 			String btshow = getResources().getString(R.string.btset);
 			String prefPic = getResources().getString(R.string.pref_pic);
 			String prefFile = getResources().getString(R.string.pref_file);
+			String updateSet = getResources().getString(R.string.change_update);
 			if (key != null) {
 				if (period.equals(key)) {
 					Log.d("settings", "onSharedPreferenceChanged key=" + key);
@@ -219,6 +228,8 @@ public class CustomLiveWallpaper extends WallpaperService {
 					for (String ft : backgroundFiles) {
 						Log.d("backgroundFiles", "backgroundFiles:" + ft);
 					}
+				}else if (updateSet.equals(key)) {
+					UPDATESET = prefs.getString(key,"all");
 				}
 			}
 		}
@@ -241,11 +252,36 @@ public class CustomLiveWallpaper extends WallpaperService {
 	
 	@Override
 	public Engine onCreateEngine() {
+		return new PaperEngine();
+	}
+
+	@Override
+	public void onCreate() {
+		super.onCreate();
 		DisplayMetrics dm = getApplicationContext().getResources()
 				.getDisplayMetrics();
 		DISPLAYWIDTH = dm.widthPixels;
 		DISPLAYHEIGHT = dm.heightPixels;
 		SCALESIZE = dm.density;
-		return new PaperEngine();
+		Log.d("connetedTest","onCreate");
+//		timer = new Timer();
+//		timer.schedule(new TimerUtil(getApplicationContext()),DateUtil.getTodayLastTime(),24*60*60*1000);
+		intent =new Intent(getApplicationContext(), TimerService.class);
+		intent.setAction("go");
+		PendingIntent sender = PendingIntent.getBroadcast(getApplicationContext(), 0, intent,0);
+		AlarmManager alarm = (AlarmManager) getSystemService(ALARM_SERVICE);
+		alarm.setRepeating(AlarmManager.RTC_WAKEUP, DateUtil.getTodayLastTime().getTime(),24*60*60*1000, sender);
+		//alarm.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+10000,24*60*60*1000, sender);
 	}
+
+	@Override
+	public void onDestroy() {
+//		timer.cancel();
+		PendingIntent sender = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, 0);
+		AlarmManager alarm = (AlarmManager) getSystemService(ALARM_SERVICE);
+		alarm.cancel(sender);
+		super.onDestroy();
+	}
+	
+	
 }

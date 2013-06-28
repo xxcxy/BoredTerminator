@@ -8,14 +8,14 @@
 
     <ImageView
         android:id="@+id/popup_img"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:contentDescription="@string/imageDescription"
         android:adjustViewBounds="true"
         android:maxHeight="270dip"
         android:maxWidth="270dip"
-        android:scaleType="fitCenter" >
-    </ImageView>
+        android:scaleType="fitCenter"
+        android:layout_gravity="center_vertical" />
 
     <TextView
         android:id="@+id/popup_text"

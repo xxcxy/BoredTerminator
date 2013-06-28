@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/settings" >
+
+    <ListPreference
+        android:entries="@array/entries"
+        android:entryValues="@array/values"
+        android:key="@string/change_period"
+        android:summary="@string/change_period_summary"
+        android:title="@string/change_period_title"
+        android:defaultValue="0" />
+    <com.custom.boredterminator.uiextends.ImageOptionPreference        
+        android:key="@string/pref_pic"
+        android:persistent="false"
+        android:title="@string/pref_pic_title"
+        android:summary="@string/pref_pic_summary"
+        android:widgetLayout="@layout/preference_widget_image"
+    />
+    <com.custom.boredterminator.uiextends.FileOptionPreference        
+        android:key="@string/pref_file"
+        android:persistent="false"
+        android:title="@string/pref_file_title"
+        android:summary="@string/pref_file_summary"
+    />
+    <PreferenceCategory android:title="@string/more_choose" >
+        <ListPreference
+        android:entries="@array/updateentries"
+        android:entryValues="@array/updatevalues"
+        android:key="@string/change_update"
+        android:summary="@string/change_update_summary"
+        android:title="@string/change_update_title"
+        android:defaultValue="all" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/btset"
+            android:summaryOff="@string/btset_summary_off"
+            android:summaryOn="@string/btset_summary_on"
+            android:title="@string/btset_title" >
+        </CheckBoxPreference>
+    </PreferenceCategory>
+
+</PreferenceScreen>

@@ -1,7 +1,5 @@
+/bin
 /gen
-/bin/dexedLibs
-/bin/res
+/libs
 /assets
-/bin/classes.dex
-/bin/resources.ap_
-/bin/classes
+.*

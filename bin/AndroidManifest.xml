@@ -1,27 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.custom.boredterminator"
-    android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionCode="2"
+    android:versionName="1.01" >
 
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="17" />
-	<uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/bt_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-        <service android:label="@string/app_name"
-            android:name=".wallpaper.CustomLiveWallpaper" android:permission="android.permission.BIND_WALLPAPER">
+        <service
+            android:name=".wallpaper.CustomLiveWallpaper"
+            android:label="@string/app_name"
+            android:permission="android.permission.BIND_WALLPAPER" >
             <intent-filter>
                 <action android:name="android.service.wallpaper.WallpaperService" />
             </intent-filter>
-            <meta-data android:name="android.service.wallpaper"
+
+            <meta-data
+                android:name="android.service.wallpaper"
                 android:resource="@xml/custompaper" />
         </service>
-        <activity android:name=".wallpaper.CustompaperSettingsActivity" android:label="@string/wallpaper_settings" android:theme="@android:style/Theme.Light.WallpaperSettings" android:exported="true"/>
-        <activity  android:name=".uiextends.CustomFileManager"  android:theme="@android:style/Theme.Dialog" />
+
+        <activity
+            android:name=".wallpaper.CustompaperSettingsActivity"
+            android:exported="true"
+            android:label="@string/wallpaper_settings"
+            android:theme="@android:style/Theme.Light.WallpaperSettings" />
+        <activity
+            android:name=".uiextends.CustomFileManager"
+            android:theme="@android:style/Theme.Dialog" />
+
+        <receiver
+            android:name=".wallpaper.TimerService"
+            android:enabled="true"
+            android:process=":remote" />
     </application>
+
 </manifest>

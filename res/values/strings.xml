@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">BoredTerminator</string>
+    <string name="app_name">无聊神器</string>
 	<string name="description">无聊神器</string>
 	<string name="imageDescription">图片</string>
 	<string name="wallpaper_settings">设置</string>
@@ -9,6 +9,9 @@
   	<string name="change_period_title">设置切换背景时间</string>
   	<string name="change_period_summary">选择背景图片文件夹后可用</string>
   	<string name="change_period">change_period</string>
+  	<string name="change_update_title">设置内容更新</string>
+  	<string name="change_update_summary">在每日凌晨0点会有当日内容更新的机会（需要联网）</string>
+  	<string name="change_update">change_update</string>
   	<string name="btset">btset</string>
   	<string name="btset_title">会无聊吗？</string>
   	<string name="btset_summary_off">不会无聊</string>
